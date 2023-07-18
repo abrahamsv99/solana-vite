@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useAutoConnect } from '../contexts/AutoConnectProvider';
-
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
-
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import NetworkSwitcher from './NetworkSwitcher';
 
 export const AppBar: React.FC = () => {
   const { autoConnect, setAutoConnect } = useAutoConnect();
@@ -82,6 +81,7 @@ export const AppBar: React.FC = () => {
                   <a>Autoconnect</a>
                   <input type="checkbox" checked={autoConnect} onChange={(e) => setAutoConnect(e.target.checked)} className="toggle" />
                 </label>
+                <NetworkSwitcher />
               </div>
             </li>
           </ul>
