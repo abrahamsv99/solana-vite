@@ -18,6 +18,9 @@ export const SomeComponent = () => {
     return (
         <>
             <h1 className="text-3xl">Hello:  {wallet?.publicKey?.toString()}</h1>
+            <div className={wallet.publicKey ? 'hidden': ' '}>
+                Connect wallet pliss
+            </div>
             {wallet.publicKey && <UnityGame
                 walletIsConnected={walletIsConnected}
                 setWalletIsConnected={setWalletIsConnected}
