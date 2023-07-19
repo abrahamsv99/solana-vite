@@ -1,6 +1,5 @@
 import { useWallet } from "@solana/wallet-adapter-react"
 import { useConnection } from "@solana/wallet-adapter-react";
-import useUserSOLBalanceStore from "../stores/useUserSOLBalanceStore";
 import { useEffect, useState } from "react";
 import { UnityGame } from './UnityGame'
 
@@ -12,6 +11,7 @@ export const SomeComponent = () => {
     useEffect(() => {
         if (wallet.publicKey) {
             setWalletIsConnected(true)
+            window.wallet = wallet.publicKey.toString();
         }
     }, [wallet.publicKey, connection])
 
@@ -21,11 +21,7 @@ export const SomeComponent = () => {
             <div className={wallet.publicKey ? 'hidden': ' '}>
                 Connect wallet pliss
             </div>
-            {wallet.publicKey && <UnityGame
-                walletIsConnected={walletIsConnected}
-                setWalletIsConnected={setWalletIsConnected}
-                wallet={wallet.publicKey?.toString()}
-            />}
+            {wallet.publicKey && <UnityGame/>}
         </>
     )
 } 
