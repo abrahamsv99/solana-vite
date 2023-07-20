@@ -1,6 +1,8 @@
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export const AppBar = () => {
+
+
   return (
     <div>
       {/* NavBar / Header */}
@@ -41,8 +43,8 @@ export const AppBar = () => {
         {/* Wallet & Settings */}
         <div className="navbar-end">
           <div className="hidden md:inline-flex align-items-center justify-items gap-6">
-            <WalletMultiButton className="btn-ghost btn-sm rounded-btn text-lg mr-6 " />
-          </div>
+          <WalletMultiButton className="btn-ghost btn-sm rounded-btn text-lg mr-6 " />
+        </div>
         </div>
       </div>
     </div>
