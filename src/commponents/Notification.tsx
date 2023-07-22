@@ -42,7 +42,6 @@ const NotificationList = () => {
 }
 
 const Notification = ({ type, message, description, txid, onHide }: any) => {
-  const { connection } = useConnection();
   const { networkConfiguration } = useNetworkConfiguration();
 
   // TODO: we dont have access to the network or endpoint here.. 
