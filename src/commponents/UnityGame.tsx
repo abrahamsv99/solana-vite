@@ -21,10 +21,8 @@ export const UnityGame = () => {
   }, [wallet, isLoaded])
 
   return (
-    <div >
       <div>
         <Unity unityProvider={unityProvider} style={{width: 800, height: 600}} devicePixelRatio={window.devicePixelRatio} className={`${wallet.publicKey ? " " : "hidden"}`} />
       </div>
-    </div>
   );
 }
