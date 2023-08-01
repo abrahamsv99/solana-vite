@@ -1,14 +1,14 @@
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { Fragment, useEffect } from "react";
+import { Wallet, WalletContextState, useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { useEffect, useCallback } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
-import { clusterApiUrl, Connection, PublicKey, Keypair, Transaction } from "@solana/web3.js";
-import { burnChecked, createBurnCheckedInstruction, TOKEN_PROGRAM_ID, AccountLayout } from "@solana/spl-token";
+import { PublicKey, Transaction } from "@solana/web3.js";
+import { createBurnCheckedInstruction } from "@solana/spl-token";
 
 export const UnityGame = () => {
   const { connection } = useConnection();
   const wallet = useWallet();
 
-  const { unityProvider, sendMessage, isLoaded } = useUnityContext({
+  const { unityProvider, sendMessage, isLoaded, addEventListener, removeEventListener } = useUnityContext({
     loaderUrl: "build/Build.loader.js",
     dataUrl: "build/Build.data",
     frameworkUrl: "build/Build.framework.js",
@@ -73,14 +73,26 @@ export const UnityGame = () => {
 
     }
     else {
+      console.log(wallet.publicKey?.toString())
       console.log("connect your wallet")
     }
   }
 
+  const insertTokenToo = useCallback(async () => {
+    insertToken();
+  }, [])
+
+  useEffect(() => {
+    addEventListener("insertToken", insertTokenToo as any);
+    return () => {
+      removeEventListener("insertToken", insertTokenToo as any)
+    };
+  }, [addEventListener, removeEventListener, insertTokenToo])
+
   return (
     <div className="flex justify-center items-center h-screen bg-black pt-64" >
       <div className="w-1/2 flex flex-col justify-center items-center">
-        <Unity unityProvider={unityProvider} style={{"width": 576, "height": 432}} devicePixelRatio={window.devicePixelRatio} />
+        <Unity unityProvider={unityProvider} style={{ "width": 576, "height": 432 }} devicePixelRatio={window.devicePixelRatio} />
         <button onClick={() => insertToken()} className="z-20 bg-amber-400 justify-center mt-8 ">
           Insert token
         </button>
